@@ -29,9 +29,7 @@ def customCallback(client, userdata, message):
         response_message = "Received your message, here's a simple response:" + MESSAGE
         print("Sending a simple response message.")
         myAWSIoTMQTTClient.publish(response_topic, json.dumps({"response": response_message}), 0)
-   # response_topic = "response/topic"
-   # response_message = "Received your message. Here's a simple response: " + MESSAGE
-   # myAWSIoTMQTTClient.publish(response_topic, json.dumps({"response": response_message}), 0)
+
 
 # Connect and subscribe to AWS IoT
 myAWSIoTMQTTClient.connect()
