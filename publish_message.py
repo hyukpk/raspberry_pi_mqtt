@@ -24,11 +24,14 @@ def customCallback(client, userdata, message):
 
     # Here, we'll just print a simple message instead of checking for a specific command
     # and responding based on that command
-    print("Sending a simple response message.")
-
-    response_topic = "response/topic"
-    response_message = "Received your message. Here's a simple response: " + MESSAGE
-    myAWSIoTMQTTClient.publish(response_topic, json.dumps({"response": response_message}), 1)
+    if message_payload.get("command") == "action_required":
+        response_topic = "response/topic"
+        response_message = "Received your message, here's a simple response:" + MESSAGE
+        print("Sending a simple response message.")
+        myAWSIoTMQTTClient.publish(response_topic, json.dumps({"response": response_message}), 0)
+   # response_topic = "response/topic"
+   # response_message = "Received your message. Here's a simple response: " + MESSAGE
+   # myAWSIoTMQTTClient.publish(response_topic, json.dumps({"response": response_message}), 0)
 
 # Connect and subscribe to AWS IoT
 myAWSIoTMQTTClient.connect()
